@@ -1,0 +1,21 @@
+.main_img{
+    width:100%;
+    hight: 300px;
+    margin-top: 20px;
+}
+
+.image{
+    margin-right: calc(100vw-20px)/3;
+}
+
+a{
+    font-size: 20px;
+    color: #000000;
+    font-family: 'Baloo', sans-serif;
+}
+h1{
+    font-family: 'Lato', sans-serif;
+}
+h2{
+    font-family: 'Eagle Lake', sans-serif;
+}
