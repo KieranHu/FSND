@@ -1,21 +1,23 @@
 .main_img{
     width:100%;
-    hight: 300px;
-    margin-top: 20px;
+    height: 480px;
+    margin-top: 10px;
 }
 
-.image{
-    margin-right: calc(100vw-20px)/3;
+.logo{
+    margin-top: 15px;
 }
 
 a{
     font-size: 20px;
-    color: #000000;
-    font-family: 'Baloo', sans-serif;
+    color: #000;
+    font-family: "Baloo", sans-serif;
 }
+
 h1{
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
 }
+
 h2{
-    font-family: 'Eagle Lake', sans-serif;
+    font-family: "Eagle Lake", sans-serif;
 }
