@@ -8,6 +8,8 @@ Here is the list for all those project:
 
 *2. Portfolio site*
 
+*3. Logs Analysis*
+
 ## Installation
 
 Clone the GitHub repository
@@ -32,3 +34,18 @@ python entertainment_center.py
 ### How to view the project two
 
 In the FSND folder, open the index.html file in folder P2_Portfolio_site
+
+## Project 3 *Logs Analysis*
+
+### How to run the code in project three  *Logs Analysis*
+
+The database is available from *Udacity* Virtual Machine, so *Vagrant* and *VirtualBox* are required. What's more, *Python3* and *psycopg2* module are also required.
+
+Copy the *Project3.py* file into the vagrant folder, which is link to the virtual Machine, in your own computer. Use
+
+```{bash}
+Python3 Project3.py
+```
+to run the code.
+
+File *result.txt* is the program's output. You should see the same result from the running result of the code. 

@@ -1,0 +1,11 @@
+Result for problem 1
+
+[('Candidate is jerk, alleges rival', 342102), ('Bears love berries, alleges bear', 256365), ('Bad things gone, say good people', 171762)]
+
+Result for problem 2
+
+[('Ursula La Multa', 512805), ('Rudolf von Treppenwitz', 427781), ('Anonymous Contributor', 171762), ('Markoff Chaney', 85387)]
+
+Result for problem 3
+
+[('2016-07-17', Decimal('0.0226'))]
