@@ -41,11 +41,15 @@ In the FSND folder, open the index.html file in folder P2_Portfolio_site
 
 The database is available from *Udacity* Virtual Machine, so *Vagrant* and *VirtualBox* are required. What's more, *Python3* and *psycopg2* module are also required.
 
-Copy the *Project3.py* file into the vagrant folder, which is link to the virtual Machine, in your own computer. Use
-
+Copy the *Project3.py* and *newdata.sql* file into the vagrant folder, which is link to the virtual Machine, in your own computer.
+To load the data, Use
+```{bash}
+psql -d news -f newsdata.sql
+```
+Use
 ```{bash}
 Python3 Project3.py
 ```
 to run the code.
 
-File *result.txt* is the program's output. You should see the same result from the running result of the code. 
+File *result.txt* is the program's output. You should see the same result from the running result of the code.
