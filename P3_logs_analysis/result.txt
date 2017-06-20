@@ -1,11 +1,16 @@
-Result for problem 1
+Result for problem 1:
+Top three most popular articles:
+Candidate is jerk, alleges rival -- 338647 views
+Bears love berries, alleges bear -- 253801 views
+Bad things gone, say good people -- 170098 views
 
-[('Candidate is jerk, alleges rival', 342102), ('Bears love berries, alleges bear', 256365), ('Bad things gone, say good people', 171762)]
+Result for problem 2:
+The most popular article authors
+Ursula La Multa           -- 507594 views
+Rudolf von Treppenwitz    -- 423457 views
+Anonymous Contributor     -- 170098 views
+Markoff Chaney            --  84557 views
 
-Result for problem 2
-
-[('Ursula La Multa', 512805), ('Rudolf von Treppenwitz', 427781), ('Anonymous Contributor', 171762), ('Markoff Chaney', 85387)]
-
-Result for problem 3
-
-[('2016-07-17', Decimal('0.0226'))]
+Result for problem 3:
+Days did more than 1% of requests lead to errors
+Date: 2016-07-17  Error rate: 0.023
