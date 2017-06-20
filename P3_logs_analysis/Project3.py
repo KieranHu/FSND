@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import psycopg2
 
 # query = 'select* from log limit 5;'
@@ -11,7 +12,7 @@ Present this information as a sorted list with the most popular article at the t
 """
 query1 = "SELECT articles.title, count(*) as number " \
          "FROM articles JOIN log ON log.path LIKE ('%'||articles.slug||'%') " \
-         "GROUP BY articles.title ORDER BY number DESC LIMIT 3;"
+         "WHERE log.status = '200 OK' GROUP BY articles.title ORDER BY number DESC LIMIT 3;"
 
 """
 2. Who are the most popular article authors of all time?
@@ -21,7 +22,7 @@ Present this as a sorted list with the most popular author at the top.
 
 query2 = "SELECT authors.name, count(*) as number FROM articles, authors, log " \
          "WHERE articles.author = authors.id AND log.path LIKE ('%'||articles.slug||'%') " \
-         "GROUP BY authors.name ORDER BY number DESC;"
+         "AND log.status = '200 OK' GROUP BY authors.name ORDER BY number DESC;"
 
 """
 3. On which days did more than 1% of requests lead to errors?
@@ -42,12 +43,24 @@ def sqlquery(query):
     cursor = conn.cursor()
     cursor.execute(query)
     results = cursor.fetchall()
-    print(results)
     conn.close()
+    return results
 
-print("Result for problem 1\n")
-sqlquery(query1)
-print("\nResult for problem 2\n")
-sqlquery(query2)
-print("\nResult for problem 3\n")
-sqlquery(query3)
+
+
+print("Result for problem 1:\n"
+      "Top three most popular articles:")
+result1 = sqlquery(query1)
+for i in result1:
+     print("%-30s -- %6d views" % (i[0], i[1]))
+
+print("\nResult for problem 2:\n"
+      "The most popular article authors")
+result2 = sqlquery(query2)
+for i in result2:
+    print("%-25s -- %6d views" %(i[0], i[1]))
+
+print("\nResult for problem 3:\n"
+       "Days did more than 1% of requests lead to errors")
+result3 = sqlquery(query3)
+print("Date: %10s  Error rate: %4.3f" % (result3[0][0], result3[0][1]))
