@@ -5,13 +5,33 @@
   <meta charset="utf-8"/>
 
   <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet" type = "text/css"/>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type = "text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Bellefair|Fresca" rel="stylesheet">
 </head>
 
-<body>
+<body class = 'form-body'>
     <form action = '{{url_for('add_category')}}' method = 'POST'>
-        <p> New Category name:</p>
-        <input type = 'text' size = 30 name = 'name' >
-        <input type = 'submit' value = 'Add'>
+        <div class="login">
+            <div class="login-screen">
+                <div class="app-title">
+                    <h1>Add Category</h1>
+                </div>
+
+                <div class="login-form">
+                    <div class="control-group">
+                    <input type="text" class="login-field" value="" placeholder="Category name" name="name">
+                    <label class="login-field-icon fui-user" for="login-name"></label>
+                    </div>
+
+                    <input type="submit" value="Add" class="btn btn-primary btn-large btn-block" >
+                    <br>
+                </div>
+            </div>
+	    </div>
+    </form>
+   <form action = '{{url_for('show_main' )}}' method = 'GET'>
+        <input class="btn btn-primary btn-large btn-block" type = 'submit' value = 'Cancel'>
     </form>
 </body>
 </html>
+

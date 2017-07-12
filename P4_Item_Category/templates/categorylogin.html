@@ -16,7 +16,7 @@
       </div>
 
       <div class = 'col-md-1'>
-        <h2> <a class = 'button' type = 'button' href = '{{ url_for('login') }}'>login</a> </h2>
+        <h2> <a class = 'button' href = '{{ url_for('logout') }}'>logout</a> </h2>
       </div>
     </div>
 
@@ -26,14 +26,16 @@
 
         {%for catalog in categories%}
         <a href = '{{ url_for('show_catalog_items', category_name = catalog.name)}}'>{{catalog.name}}</a>
-         </br>
+         <br>
         {% endfor %}
+        <br><a class = 'button' href = '{{ url_for('add_category')}}'>Add</a>
+
       </div>
 
       <div class = 'col-md-9'>
         <h3>Latest items</h3>
         {%for item in items%}
-            <a href = '{{ url_for('show_item_detail', item_name = item.name)}}'>{{item.name}} ({{item.time}})</a>
+            <a  href = '{{ url_for('show_item_detail', item_name = item.name)}}'>{{item.name}} ({{item.time}})</a>
          </br>
         {%endfor%}
       </div>

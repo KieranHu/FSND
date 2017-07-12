@@ -12,19 +12,22 @@
 <body>
 <div class = 'container'>
     <div class = 'row head'>
-        <div class = 'col-md-10'>
-            <h2>Catalog App</h2>
-        </div>
-        <div class='col-md-2'>
-            <h2> <a class = 'button' href = '{{ url_for('login') }}'>login</a></h2>
-        </div>
+      <div class = 'col-md-10'>
+        <h2>Catalog App</h2>
+      </div>
+
+      <div class = 'col-md-2'>
+        <h2> <a class = 'button' href = '{{ url_for('logout') }}'>logout</a> </h2>
+      </div>
     </div>
 
-   <div class = 'row'>
+    <div class = 'row'>
         <div class = 'col-md-3'>
             <h3>Categories</h3>
-            <br>
+            </br>
             {{ categories }}
+            <span><a href = '{{ url_for('edit_category', category_name = categories )}}'>Edit</a> </span>
+            <span><a href = '{{ url_for('delete_category', category_name = categories )}}'>Delete</a> </span>
         </div>
 
         <div class = 'col-md-9'>
@@ -33,14 +36,14 @@
             {%for item in items%}
             <a href = '{{ url_for('show_item_detail',item_name = item.name)}}'>{{item.name}}</a> </br>
             {% endfor %}
+            <a class = 'button' href = '{{ url_for('add_catalog_items', category_name = categories)}}'>Add new item</a>
         </div>
     </div>
-
 
     <div class = 'row'>
         <div class = 'col-md-10'></div>
         <div class = 'col-md-2'>
-            <a class = 'button' href = '{{ url_for('show_main') }}'> Back to Home</a>
+            <a class = 'button'  href = '{{ url_for('show_main') }}'> Back to Home</a>
         </div>
     </div>
 </div>

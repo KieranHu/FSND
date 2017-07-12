@@ -5,15 +5,29 @@
   <meta charset="utf-8"/>
 
   <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet" type = "text/css"/>
-
+<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type = "text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Bellefair|Fresca" rel="stylesheet">
 </head>
-<body>
-<h1>Do you want to delete {{ categories }}</h1>
-<span><form action = '{{url_for('delete_category', category_name = categories)}}' method = 'POST'>
-    <input type = 'submit' value = 'Delete'>
-</form></span>
-<span><form action = '{{url_for('show_catalog_items', category_name = categories)}}' method = 'POST'>
-    <input type = 'submit' value = 'Cancel'>
-</form></span>
+
+<body class = 'form-body'>
+    <form action = '{{url_for('delete_category', category_name = categories)}}' method = 'POST'>
+        <div class="login">
+            <div class="login-screen">
+                <div class="app-title">
+                    <h1>Do you want to delete {{ categories }}</h1>
+                </div>
+
+                    <input type="submit" value="Delete" class="btn btn-primary btn-large btn-block" >
+                    <br>
+                </div>
+            </div>
+	    </div>
+    </form>
+   <form action = '{{url_for('show_catalog_items', category_name = categories)}}' method = 'GET'>
+        <input class="btn btn-primary btn-large btn-block" type = 'submit' value = 'Cancel'>
+    </form>
+</body>
 </body>
 </html>
+
+

@@ -5,17 +5,36 @@
   <meta charset="utf-8"/>
 
   <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet" type = "text/css"/>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type = "text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Bellefair|Fresca" rel="stylesheet">
 </head>
 
-<body>
-    <form action = '{{url_for('add_catalog_items', category_name = categories )}}' method = 'POST'>
-        <p> Add new item in {{ categories }}:</p>
-        <input type = 'text' size = 30 name = 'name' >
 
-        <textarea rows="10" cols="30" name = 'description' >
-            Item description.
-        </textarea>
-        <input type = 'submit' value = 'Add'>
+<body class = 'form-body'>
+    <form action = '{{url_for('add_catalog_items', category_name = categories )}}' method = 'POST'>
+        <div class="login">
+            <div class="login-screen">
+                <div class="app-title">
+                    <h1>Add new item in {{ categories }}</h1>
+                </div>
+
+                <div class="login-form">
+                    <div class="control-group">
+                    <input type="text" class="login-field" value="" placeholder="Item name" name="name">
+                    <label class="login-field-icon fui-user" for="login-name"></label>
+                    </div>
+
+                    <textarea rows="10" cols="30" name = 'description' placeholder=" Item description.">Input item description here.
+                    </textarea>
+
+                    <input type="submit" value="Add" class="btn btn-primary btn-large btn-block" >
+                    <br>
+                </div>
+            </div>
+	    </div>
+    </form>
+   <form action = '{{url_for('show_main' )}}' method = 'GET'>
+        <input class="btn btn-primary btn-large btn-block" type = 'submit' value = 'Cancel'>
     </form>
 </body>
 </html>

@@ -9,39 +9,34 @@
     <link href="https://fonts.googleapis.com/css?family=Bellefair|Fresca" rel="stylesheet">
 </head>
 
-
 <body class = 'form-body'>
-    <form action = '{{url_for('edit_item', item_name = items )}}' method = 'POST'>
+    <h3>New account</h3>
+    <form action = '{{url_for('create_account' )}}' method = 'POST'>
         <div class="login">
             <div class="login-screen">
                 <div class="app-title">
-                    <h1> Edit {{ items }}</h1>
+                    <h1>New account</h1>
                 </div>
 
                 <div class="login-form">
                     <div class="control-group">
-                    <input type="text" class="login-field" value="" placeholder="Edit Name" name="name">
+                    <input type="text" class="login-field" value="" placeholder="username" name="username">
                     <label class="login-field-icon fui-user" for="login-name"></label>
                     </div>
 
                     <div class="control-group">
-                    <input type="text" class="login-field" value="" placeholder="Edit Category" name="catename">
-                    <label class="login-field-icon fui-user" for="login-name"></label>
+                    <input type="password" class="login-field" value="" placeholder="password" name="password">
+                    <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
 
-                    <textarea rows="10" cols="30" name = 'description' placeholder=" Item description.">Input new item description here.
-                    </textarea>
-
-                    <input type="submit" value="Edit" class="btn btn-primary btn-large btn-block" >
+                    <input type="submit" value="Create" class="btn btn-primary btn-large btn-block" >
                     <br>
                 </div>
             </div>
 	    </div>
     </form>
-   <form action = '{{url_for('show_main' )}}' method = 'GET'>
+    <form action = '{{url_for('show_main' )}}' method = 'GET'>
         <input class="btn btn-primary btn-large btn-block" type = 'submit' value = 'Cancel'>
-   </form>
+    </form>
 </body>
-
-
 </html>

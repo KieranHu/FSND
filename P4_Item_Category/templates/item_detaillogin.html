@@ -6,7 +6,6 @@
 
   <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet" type = "text/css"/>
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type = "text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Bellefair|Fresca" rel="stylesheet">
 </head>
 
 <body>
@@ -14,26 +13,31 @@
         <div class = 'row head'>
             <div class = 'col-md-10'>
                 <h2>Catalog App</h2>
-            </div>
-            <div class='col-md-2'>
-                <h2> <a class = 'button'  href = '{{ url_for('login') }}'>login</a></h2>
+             </div>
+
+            <div class = 'col-md-2'>
+                <h2> <a class = 'button' href = '{{ url_for('logout') }}'>logout</a> </h2>
             </div>
         </div>
 
         <div class = 'row'>
             <div class = 'col-md-10'>
                 {{ items.name }}
-                <br>
+                </br>
                 <a href = '{{ url_for('show_catalog_items', category_name = items.catename)}}'>{{items.catename}}</a>
-                <br>
+                </br>
                 <p>{{ items.description }}</p>
+            </div>
+            <div class = 'col-md-2 bottom-align-text '>
+                <span><a class = 'button' href = '{{ url_for('edit_item', item_name = items.name)}}'>Edit</a></span>
+                <span><a class = 'button' href = '{{ url_for('delete_item', item_name = items.name)}}'>Delete</a></span>
             </div>
         </div>
 
         <div class = 'row'>
             <div class = 'col-md-10'></div>
             <div class = 'col-md-2'>
-                <a class = 'button'  href = '{{ url_for('show_main') }}'> Back to Home</a>
+                <a class = 'button' href = '{{ url_for('show_main') }}'> Back to Home</a>
             </div>
         </div>
     </div>
