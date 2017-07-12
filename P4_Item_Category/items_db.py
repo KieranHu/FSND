@@ -20,6 +20,7 @@ class Items(Base):
     description = Column(String(1000), nullable=False)
     time = Column(DateTime, default=datetime.datetime.utcnow)
     category_id = Column(Integer, ForeignKey('category.id'))
+    catename = Column(String(250), nullable=False)
     item = relationship(Category)
 
     @property
@@ -27,7 +28,8 @@ class Items(Base):
         return {
             'id':self.id,
             'name':self.name,
-            'description':self.description
+            'description':self.description,
+            'category':self.catename
         }
 
 engine = create_engine('sqlite:///item.db')

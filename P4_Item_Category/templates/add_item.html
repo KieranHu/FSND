@@ -8,9 +8,13 @@
 </head>
 
 <body>
-    <form action = '{{url_for('add_category')}}' method = 'POST'>
-        <p> New Category name:</p>
+    <form action = '{{url_for('add_catalog_items', category_name = categories )}}' method = 'POST'>
+        <p> Add new item in {{ categories }}:</p>
         <input type = 'text' size = 30 name = 'name' >
+
+        <textarea rows="10" cols="30" name = 'description' >
+            Item description.
+        </textarea>
         <input type = 'submit' value = 'Add'>
     </form>
 </body>

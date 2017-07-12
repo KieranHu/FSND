@@ -1,9 +1,9 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
 
-  <link href="css/bootstrap.css" rel="stylesheet" type = "text/css"/>
+  <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet" type = "text/css"/>
 </head>
 
 <body>
@@ -21,17 +21,26 @@
     <div class = 'row'>
       <div class = 'col-md-3'>
         <h3>Categories</h3>
-        </br>
-        {%for cata in category%}
-        {{cata}}
-        {%endfor%}
+
+        {%for catalog in categories%}
+        <a href = '{{ url_for('show_catalog_items', category_name = catalog.name)}}'>{{catalog.name}}</a>
+         </br>
+        {% endfor %}
+
+          <span><a href = '{{ url_for('add_category')}}'>Add</a> </span>
+
+
       </div>
 
       <div class = 'col-md-9'>
         <h3>Latest items</h3>
         {%for item in items%}
-        {{item}}
+            <a href = '{{ url_for('show_item_detail', item_name = item.name)}}'>{{item.name}} ({{item.time}})</a>
+         </br>
         {%endfor%}
-      <div>
+      </div>
+    </div>
+
   </div>
 </body>
+</html>
