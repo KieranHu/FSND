@@ -137,8 +137,13 @@ def delete_item(item_name):
     else:
         return render_template('delete_item.html', items = item_name)
 
+@app.route('/catalog/<category_name>/json/')
+def itemJSON(category_name):
+    category = session.query(Category).filter_by(name = category_name).one()
+    items = session.query(Items).filter_by(category_id = category.id).all()
+    return jsonify(Items = [i.serialize for i in items])
 
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8000)
