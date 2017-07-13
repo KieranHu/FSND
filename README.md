@@ -10,6 +10,8 @@ Here is the list for all those project:
 
 *3. Logs Analysis*
 
+*4. Item Catalog*
+
 ## Installation
 
 Clone the GitHub repository
@@ -53,3 +55,12 @@ Python3 Project3.py
 to run the code.
 
 File *result.txt* is the program's output. You should see the same result from the running result of the code.
+
+## Project 4 *4. Item Catalog*
+
+### Run the code
+
+```{bash}
+python3 main.py
+```
+Then goto http://localhost:5000 to see the result.
