@@ -56,7 +56,7 @@ to run the code.
 
 File *result.txt* is the program's output. You should see the same result from the running result of the code.
 
-## Project 4 *4. Item Catalog*
+## Project 4 *Item Catalog*
 
 ### Run the code
 
