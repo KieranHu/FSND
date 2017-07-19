@@ -12,6 +12,8 @@ Here is the list for all those project:
 
 *4. Item Catalog*
 
+*6. Linux Server Configuration*
+
 ## Installation
 
 Clone the GitHub repository
@@ -64,3 +66,7 @@ File *result.txt* is the program's output. You should see the same result from t
 python3 main.py
 ```
 Then goto http://localhost:5000 to see the result.
+
+## Project 6 *Linux Server Configuration*
+
+Goto folder P6_Linux_Server_Configuration see detail
