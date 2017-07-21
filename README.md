@@ -75,8 +75,8 @@ Then goto [localhost](http://localhost:5000) to see the result.
 
 Open the *index.html* file in folder *P5_Neighbohood_Map*.
 
-The detail information for this project is at [here]().
+The detail information for this project is at [here](https://github.com/KieranHu/FSND/tree/master/P5_Neighbohood_Map).
 
 ## Project 6 *Linux Server Configuration*
 
-Goto [Here](https://github.com/KieranHu/FSND/tree/master/P6_Linux_Server_Configuration) to see detail
+Open this [link](https://github.com/KieranHu/FSND/tree/master/P6_Linux_Server_Configuration) to see detail.
