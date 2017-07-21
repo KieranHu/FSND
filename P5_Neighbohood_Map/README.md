@@ -13,6 +13,7 @@ http://knockoutjs.com/documentation/submit-binding.html
 https://stackoverflow.com/questions/33495879/uncaught-referenceerror-google-is-not-defined-at-google-maps-marker
 https://stackoverflow.com/questions/20003952/uncaught-invalidvalueerror-setmap-not-an-instance-of-map
 https://developers.google.com/maps/documentation/javascript/
+https://tympanus.net/codrops/2013/07/30/google-nexus-website-menu/
 Udacity
 
 # Sample image
