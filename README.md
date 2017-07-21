@@ -12,6 +12,8 @@ Here is the list for all those project:
 
 *4. Item Catalog*
 
+*5. Neighborhood Map*
+
 *6. Linux Server Configuration*
 
 ## Installation
@@ -65,8 +67,16 @@ File *result.txt* is the program's output. You should see the same result from t
 ```{bash}
 python3 main.py
 ```
-Then goto http://localhost:5000 to see the result.
+Then goto [localhost](http://localhost:5000) to see the result.
+
+## Project 5 *Neighborhood Map*
+
+### Run the code
+
+Open the *index.html* file in folder *P5_Neighbohood_Map*.
+
+The detail information for this project is at [here]().
 
 ## Project 6 *Linux Server Configuration*
 
-Goto folder P6_Linux_Server_Configuration see detail
+Goto [Here](https://github.com/KieranHu/FSND/tree/master/P6_Linux_Server_Configuration) to see detail
