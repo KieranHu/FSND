@@ -20,12 +20,8 @@ Udacity
 
 ![1](https://github.com/KieranHu/FSND/blob/master/P5_Neighbohood_Map/1.png)
 
-![6](https://github.com/KieranHu/FSND/blob/master/P5_Neighbohood_Map/6.png)
-
 ![2](https://github.com/KieranHu/FSND/blob/master/P5_Neighbohood_Map/2.png)
 
 ![3](https://github.com/KieranHu/FSND/blob/master/P5_Neighbohood_Map/3.png)
 
 ![4](https://github.com/KieranHu/FSND/blob/master/P5_Neighbohood_Map/4.png)
-
-![5](https://github.com/KieranHu/FSND/blob/master/P5_Neighbohood_Map/5.png)
