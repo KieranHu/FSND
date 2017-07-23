@@ -21,44 +21,28 @@
                 <nav class="gn-menu-wrapper">
                     <div class="gn-scroller">
                         <ul class="gn-menu">
-                             <li class="gn-search-item">
-                                <input id = "search-within-time-text" data-bind = "click: searchWithinTime"type="search" class="gn-search" placeholder="YOUR LOCATION">
-                                <a class="gn-icon gn-icon-search" data-bind = "click: searchWithinTime" ><span>Search</span></a>
-                            </li>
                             <li>
-                                <a class="gn-icon gn-icon-cog">Filter: Find Places</a>
-                                <ul class="gn-submenu">
-
-                                    <li class = "archive">
-                                        <span>&#160&#160&#160&#160&#160&#160&#160</span>
-                                             <span><select id="max-duration">
-                                                <option value="10">10 min</option>
-                                                <option value="15">15 min</option>
-                                                <option selected = "selected" value="30">30 min</option>
-                                                <option value="60">1 hour</option>
-                                             </select></span>
-                                             <span><select id="mode">
-                                               <option value="DRIVING">drive</option>
-                                               <option selected = "selected" value="WALKING">walk</option>
-                                               <option value="BICYCLING">bike</option>
-                                               <option value="TRANSIT">transit ride</option>
-                                             </select></span>
-                                             <span>Away</span>
-                                        </li>
-
-                                </ul>
+                                <span>&#160&#160&#160Filter&#160&#160&#160&#160&#160&#160&#160</span>
+                                    <span>
+                                        <select id="area">
+                                            <option value="all" selected = "selected">New York</option>
+                                            <option value="manhattan">Manhattan</option>
+                                            <option value="queens">Queens</option>
+                                            <option value="brooklyn">Brooklyn</option>
+                                            <option value="bronx">Bronx</option>
+                                        </select>
+                                    </span><input type = "submit" data-bind = "click:refresh" />
                             </li>
-                            <li><a id = "toggle-drawing" data-bind = "click: drawing" class="gn-icon gn-icon-photoshop">Drawing Tools</a></li>
-                            <li><a class="gn-icon gn-icon-help">Help</a></li>
+
+                            <li data-bind="foreach: placeMarkers">
+                                <div data-bind = "text:title"></div>
+                            </li>
+
                         </ul>
                     </div><!-- /gn-scroller -->
                 </nav>
             </li>
             <li><a class="codrops-icon codrops-icon-drop" data-bind = "click: showListings"><span>List Pop Janpanese Restaurant In NYC</span></a></li>
-            <li>
-                <input id="places-search" class="codrops-icon codrops-icon-drop" type="search" class="gn-search"  placeholder="Search nearby places" >
-                <span><input id = "search" type = "submit" class = "em em-fork_and_knife" value = " " data-bind = "click:textSearchPlaces"></span>
-            </li>
             <li><a class="codrops-icon codrops-icon-drop" data-bind = "click: hideAllMarkers"><span>Hide the List</span></a></li>
         </ul>
 
