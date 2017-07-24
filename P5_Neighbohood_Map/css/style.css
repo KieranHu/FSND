@@ -18,8 +18,8 @@
 }
 
 #pano {
-  width: 200px;
-  height: 200px;
+    width: 200px;
+    height: 200px;
 }
 
 #innerHTML {
@@ -53,8 +53,8 @@
 		text-align: left;
 		margin-left: 0px;
 	}
-	.map-full{
-		height:92.5%;
+	.map-full {
+		height: 92.5%;
 	}
 
 }

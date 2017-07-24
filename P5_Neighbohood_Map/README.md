@@ -4,6 +4,14 @@ Your can view the [website](https://kieranhu.github.io/Neighborhood_map/) at her
 
 This app can display some pop japanese restaurant in NYC area. You can alos filter those restaurants according to their location.
 
+## Locally run this app
+
+```{bash}
+git clone https://github.com/KieranHu/FSND.git
+cd P5_Neighbohood_Map
+```
+
+Use your browser to open *index.html*.
 
 ## Third party API
 This app use third party, which provide by accuweather, to display weather.  This api limit 50 request per day. If the marker content does not show weather information, it might be the request exceed 50.

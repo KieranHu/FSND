@@ -123,10 +123,8 @@ function initMap(){
     var largeInfowindow = new google.maps.InfoWindow();
     // Style the markers a bit. This will be our listing marker icon.
     var defaultIcon = makeMarkerIcon('0091ff');
-
-    // Create a "highlighted location" marker color for when the user
-    // mouses over the marker.
     var highlightedIcon = makeMarkerIcon('FFFF24');
+    var clickIcon = makeMarkerIcon('0f0');
 
     // The following group uses the location array to create an array of markers on initialize.
     for (var i = 0; i < locations.length; i++) {
@@ -148,9 +146,8 @@ function initMap(){
       // Create an onclick event to open the large infowindow at each marker.
       marker.addListener('click', function() {
         populateInfoWindow(this, largeInfowindow);
+        this.setIcon(clickIcon);
       });
-      // Two event listeners - one for mouseover, one for mouseout,
-      // to change the colors back and forth.
       marker.addListener('mouseover', function() {
         this.setIcon(highlightedIcon);
       });
@@ -178,6 +175,7 @@ var viewModel = function(){
         placeMarkers.removeAll();
         placeMarkers.push(restaurant);
         populateInfoWindow(restaurant, largeInfowindow);
+        restaurant.setIcon(clickIcon);
         showListings();
     };
 
@@ -200,6 +198,9 @@ selectedArea.subscribe(function(value){
         showListings();
     });
 
+function mapError(){
+      window.alert('Map did not load correctly!');
+    }
 //******************************************************************************************************//
 
 function populateInfoWindow(marker, infowindow) {
@@ -211,6 +212,7 @@ function populateInfoWindow(marker, infowindow) {
           infowindow.addListener('closeclick', function() {
             infowindow.marker = null;
           });
+
           var location_key;
           var lat = marker.getPosition().lat();
           var lng = marker.getPosition().lng();
@@ -221,11 +223,11 @@ function populateInfoWindow(marker, infowindow) {
           var inner;
           $.ajax({
               url:url_lockey,
-              async: false,
+              async: true,
               success:function(data){
                   $.ajax({
                       url:url_weather1 + data.Key + apikey,
-                      async: false,
+                      async: true,
                       success:function(html){
                               var min = html.DailyForecasts[0].Temperature.Minimum.Value;
                               var max = html.DailyForecasts[0].Temperature.Maximum.Value
@@ -239,42 +241,52 @@ function populateInfoWindow(marker, infowindow) {
                                       'RealFeel: From ' + realmin + 'F' + ' to ' + realmax+ 'F' + '<br>' +
                                       'Daytime: ' + dayp + '<br>' +
                                       'Nght: ' + nightp + '<br>';
-                              }
-                          });
+                                      succ();
+                              },
+                      error:function(){
+                          inner = '<div> Weather not found</div>';
+                      }
 
-              },
-              error:function(){
-                  inner += '<div> Weather not found</div>';
-              }
-          });
-          var streetViewService = new google.maps.StreetViewService();
-          var radius = 50;
-          function getStreetView(data, status) {
-              console.log(status);
-            if (status == google.maps.StreetViewStatus.OK) {
-              var nearStreetViewLocation = data.location.latLng;
-              var heading = google.maps.geometry.spherical.computeHeading(
-                nearStreetViewLocation, marker.position);
-                infowindow.setContent('<div id = "innerHTML">'+ inner +'</div>'+'<div>'+ marker.title + '</div><div id="pano"></div>');
-                var panoramaOptions = {
-                  position: nearStreetViewLocation,
-                  pov: {
-                    heading: heading,
-                    pitch: 30
-                  }
-                };
-
-              var panorama = new google.maps.StreetViewPanorama(
-                document.getElementById('pano'), panoramaOptions);
-            } else {
-              infowindow.setContent('<div id = "innerHTML">' + inner +'</div>'+'<div>'+ marker.title + '</div>' +
-                '<div>No Street View Found</div>');
+                  });
+            },
+            error:function(){
+                inner += '<div> localtion key not found</div>';
+                succ();
             }
+          });
+
+          function succ(){
+              var streetViewService = new google.maps.StreetViewService();
+              var radius = 50;
+              function getStreetView(data, status) {
+                  console.log(status);
+                if (status == google.maps.StreetViewStatus.OK) {
+                  var nearStreetViewLocation = data.location.latLng;
+                  var heading = google.maps.geometry.spherical.computeHeading(
+                    nearStreetViewLocation, marker.position);
+                    infowindow.setContent('<div id = "innerHTML">'+ inner +'</div>'+'<div>'+ marker.title + '</div><div id="pano"></div>');
+                    var panoramaOptions = {
+                      position: nearStreetViewLocation,
+                      pov: {
+                        heading: heading,
+                        pitch: 30
+                      }
+                    };
+
+                  var panorama = new google.maps.StreetViewPanorama(
+                    document.getElementById('pano'), panoramaOptions);
+                } else {
+                  infowindow.setContent('<div id = "innerHTML">' + inner +'</div>'+'<div>'+ marker.title + '</div>' +
+                    '<div>No Street View Found</div>');
+                }
+              }
+
+              streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+              // Open the infowindow on the correct marker.
+              infowindow.open(map, marker);
+
           }
 
-          streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-          // Open the infowindow on the correct marker.
-          infowindow.open(map, marker);
         }
       }
 
