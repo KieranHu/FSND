@@ -38,7 +38,7 @@
                 </nav>
             </li>
             <!-- a here is for styling -->
-            <li><a class="codrops-icon codrops-icon-drop">Filter<select class='space' data-bind="options: areaList, value:selectedArea"></select></a></li>
+            <li class="menu_button">Filter<select class='space' data-bind="options: areaList, value:selectedArea"></select></li>
             <li><a class="codrops-icon codrops-icon-drop" data-bind="click: showListings"><span>List Pop Janpanese Restaurant In NYC</span></a></li>
             <li><a class="codrops-icon codrops-icon-drop" data-bind="click: hideAllMarkers"><span>Hide the List</span></a></li>
         </ul>
@@ -54,9 +54,12 @@
     <script>
         new gnMenu( document.getElementById( 'gn-menu' ) );
     </script>
-    <script src=
-        "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDcbUPCzjDBhVogtJmPSpJjwMbkQCLzuCM&v=3.exp&callback=initMap"
-        async defer onerror="mapError()" >
+    <!-- use for test onerror method<script src= "https://maps./maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDcbUPCzjDBhVogtJmPSpJjwMbkQCLzuCM&v=3.exp&callback=initMap"
+        async defer onerror="mapError()">
+    </script> -->
+
+    <script src= "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDcbUPCzjDBhVogtJmPSpJjwMbkQCLzuCM&v=3.exp&callback=initMap"
+        async defer onerror="mapError()">
     </script>
 </body>
 </html>

@@ -199,7 +199,7 @@ selectedArea.subscribe(function(value){
     });
 
 function mapError(){
-      window.alert('Map did not load correctly!');
+     alert('Map did not load correctly!');
     }
 //******************************************************************************************************//
 

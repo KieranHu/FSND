@@ -40,6 +40,13 @@
 	margin-right: 15px;
 }
 
+.menu_button {
+    padding: 0 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
 
 @media screen and (max-width: 740px) {
 
