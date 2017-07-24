@@ -5,7 +5,6 @@ var locations = [
         title:"Sake II",
         lat:40.854068,
         lng:-73.884710,
-        visible: ko.observable(true),
         location:'Bronx'
     },
 
@@ -13,7 +12,6 @@ var locations = [
         title:"Yokohama",
         lat:40.887091,
         lng:-73.904728,
-        visible: ko.observable(true),
         location:'Bronx'
     },
 
@@ -21,7 +19,6 @@ var locations = [
         title:"Ariyoshi",
         lat:40.743935,
         lng:-73.922927,
-        visible: ko.observable(true),
         location: 'Queens'
     },
 
@@ -29,7 +26,6 @@ var locations = [
         title:"Syo",
         lat:40.763160,
         lng:-73.928229,
-        visible: ko.observable(true),
         location: 'Queens'
     },
 
@@ -37,7 +33,6 @@ var locations = [
         title:"Yuka",
         lat:40.762406,
         lng:-73.9312114,
-        visible: ko.observable(true),
         location: 'Queens'
     },
 
@@ -45,7 +40,6 @@ var locations = [
         title: "Ajisai",
         lat:40.759554,
         lng:-73.992154,
-        visible: ko.observable(true),
         location: 'Manhattan'
     },
 
@@ -53,7 +47,6 @@ var locations = [
         title:"Tsushima",
         lat:40.751649,
         lng:-73.972810,
-        visible: ko.observable(true),
         location: 'Manhattan'
     },
 
@@ -61,7 +54,6 @@ var locations = [
         title:"Edo Sushi",
         lat:40.737757,
         lng:-73.991244,
-        visible: ko.observable(true),
         location: 'Manhattan'
     },
 
@@ -69,7 +61,6 @@ var locations = [
         title:"Marumi",
         lat:40.729002,
         lng:-73.998409,
-        visible: ko.observable(true),
         location: 'Manhattan'
     },
 
@@ -77,7 +68,6 @@ var locations = [
         title:"Yama",
         lat:40.720947,
         lng: -73.994399,
-        visible: ko.observable(true),
         location: 'Manhattan'
     },
 
@@ -85,7 +75,6 @@ var locations = [
         title:"Zenkichi",
         lat:40.718964,
         lng:-73.960830,
-        visible: ko.observable(true),
         location: 'Brooklyn'
     },
 
@@ -93,7 +82,6 @@ var locations = [
         title:"Ako",
         lat:40.717480,
         lng:-73.958936,
-        visible: ko.observable(true),
         location: 'Brooklyn'
     },
 
@@ -101,7 +89,6 @@ var locations = [
         title:"Shalom Japan",
         lat:40.709173,
         lng:-73.955848,
-        visible: ko.observable(true),
         location: 'Brooklyn'
     },
 
@@ -109,7 +96,6 @@ var locations = [
         title:"Kyoto Sushi",
         lat:40.724773,
         lng:-73.945893,
-        visible: ko.observable(true),
         location: 'Brooklyn'
     }
 ];
@@ -179,9 +165,6 @@ showListings();
 
 
 var viewModel = function(){
-
-    var self = this;
-
     this.showListings = function(){
         showListings();
     };
@@ -194,6 +177,7 @@ var viewModel = function(){
         hideMarkers(placeMarkers);
         placeMarkers.removeAll();
         placeMarkers.push(restaurant);
+        populateInfoWindow(restaurant, largeInfowindow);
         showListings();
     };
 
