@@ -6,7 +6,7 @@ var locations = [
         lat:40.854068,
         lng:-73.884710,
         visible: ko.observable(true),
-        location:'bronx'
+        location:'Bronx'
     },
 
     {
@@ -14,7 +14,7 @@ var locations = [
         lat:40.887091,
         lng:-73.904728,
         visible: ko.observable(true),
-        location:'bronx'
+        location:'Bronx'
     },
 
     {
@@ -22,7 +22,7 @@ var locations = [
         lat:40.743935,
         lng:-73.922927,
         visible: ko.observable(true),
-        location: 'queens'
+        location: 'Queens'
     },
 
     {
@@ -30,7 +30,7 @@ var locations = [
         lat:40.763160,
         lng:-73.928229,
         visible: ko.observable(true),
-        location: 'queens'
+        location: 'Queens'
     },
 
     {
@@ -38,7 +38,7 @@ var locations = [
         lat:40.762406,
         lng:-73.9312114,
         visible: ko.observable(true),
-        location: 'queens'
+        location: 'Queens'
     },
 
     {
@@ -46,7 +46,7 @@ var locations = [
         lat:40.759554,
         lng:-73.992154,
         visible: ko.observable(true),
-        location: 'manhattan'
+        location: 'Manhattan'
     },
 
     {
@@ -54,7 +54,7 @@ var locations = [
         lat:40.751649,
         lng:-73.972810,
         visible: ko.observable(true),
-        location: 'manhattan'
+        location: 'Manhattan'
     },
 
     {
@@ -62,7 +62,7 @@ var locations = [
         lat:40.737757,
         lng:-73.991244,
         visible: ko.observable(true),
-        location: 'manhattan'
+        location: 'Manhattan'
     },
 
     {
@@ -70,7 +70,7 @@ var locations = [
         lat:40.729002,
         lng:-73.998409,
         visible: ko.observable(true),
-        location: 'manhattan'
+        location: 'Manhattan'
     },
 
     {
@@ -78,7 +78,7 @@ var locations = [
         lat:40.720947,
         lng: -73.994399,
         visible: ko.observable(true),
-        location: 'manhattan'
+        location: 'Manhattan'
     },
 
     {
@@ -86,7 +86,7 @@ var locations = [
         lat:40.718964,
         lng:-73.960830,
         visible: ko.observable(true),
-        location: 'brooklyn'
+        location: 'Brooklyn'
     },
 
     {
@@ -94,7 +94,7 @@ var locations = [
         lat:40.717480,
         lng:-73.958936,
         visible: ko.observable(true),
-        location: 'brooklyn'
+        location: 'Brooklyn'
     },
 
     {
@@ -102,7 +102,7 @@ var locations = [
         lat:40.709173,
         lng:-73.955848,
         visible: ko.observable(true),
-        location: 'brooklyn'
+        location: 'Brooklyn'
     },
 
     {
@@ -110,18 +110,9 @@ var locations = [
         lat:40.724773,
         lng:-73.945893,
         visible: ko.observable(true),
-        location: 'brooklyn'
+        location: 'Brooklyn'
     }
 ];
-
-
-function loadMap(){
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDcbUPCzjDBhVogtJmPSpJjwMbkQCLzuCM&v=3.exp&callback=initMap";
-        document.body.appendChild(script);
-}
-window.onload = loadMap;
 
 //global variable
 var map;
@@ -131,6 +122,7 @@ var markers = ko.observableArray();
 // Create placemarkers array to use in multiple functions to have control
 // over the number of places that show.
 var placeMarkers = ko.observableArray();
+
 
 //******************************************************************************************************//
 
@@ -143,24 +135,6 @@ function initMap(){
           disableDefaultUI: true,
           };
      map = new google.maps.Map(document.getElementById('map'), initMapOption);
-
-//******************************************************************************************************//
-
-// //1//
-//         var timeAutocomplete = new google.maps.places.Autocomplete(
-//             document.getElementById('search-within-time-text'));
-//
-//         var searchBox = new google.maps.places.SearchBox(
-//             document.getElementById('places-search'));
-//         // Bias the searchbox to within the bounds of the map.
-//         searchBox.setBounds(map.getBounds());
-//
-//         // Listen for the event fired when the user selects a prediction from the
-//         // picklist and retrieve more details for that place.
-//         searchBox.addListener('places_changed', function() {
-//           searchBoxPlaces(this);
-//         });
-
 
 //******************************************************************************************************//
     var largeInfowindow = new google.maps.InfoWindow();
@@ -211,6 +185,9 @@ function initMap(){
 var viewModel = function(){
 
     var self = this;
+    this.areaList = ko.observableArray(['New York', 'Manhattan', 'Queens', 'Brooklyn', 'Bronx'])
+    this.selectedArea = ko.observableArray(['New York'])
+    
     this.showListings = function(){
         showListings();
     }
@@ -234,10 +211,6 @@ ko.applyBindings(new viewModel());
 //******************************************************************************************************//
 // In map event control//
 
-
-      // This function populates the infowindow when the marker is clicked. We'll only allow
-      // one infowindow which will open at the marker that is clicked, and populate based
-      // on that markers position.
       function populateInfoWindow(marker, infowindow) {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
@@ -248,18 +221,54 @@ ko.applyBindings(new viewModel());
           infowindow.addListener('closeclick', function() {
             infowindow.marker = null;
           });
+          var location_key;
+          var lat = marker.getPosition().lat();
+          var lng = marker.getPosition().lng();
+          var url_lockey = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=cE8RhaCzepxklSGYwdciXv9ugtB0wxYR&q="
+                      + lat +"%2C" + lng;
+          var url_weather1 = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/";
+          var apikey = "?apikey=cE8RhaCzepxklSGYwdciXv9ugtB0wxYR&details=True";
+          var inner;
+          $.ajax({
+              url:url_lockey,
+              async: false,
+              success:function(data){
+                  $.ajax({
+                      url:url_weather1 + data.Key + apikey,
+                      async: false,
+                      success:function(html){
+                              var min = html.DailyForecasts[0].Temperature.Minimum.Value;
+                              var max = html.DailyForecasts[0].Temperature.Maximum.Value
+                              var realmin = html.DailyForecasts[0].RealFeelTemperature.Minimum.Value;
+                              var realmax = html.DailyForecasts[0].RealFeelTemperature.Maximum.Value;
+                              var dayp = html.DailyForecasts[0].Day.LongPhrase;
+                              var nightp = html.DailyForecasts[0].Night.LongPhrase;
+
+                              inner = '<br><br><strong>Weather</strong><br>';
+                              inner += 'Temperature: From ' + min + 'F' + ' to ' + max + 'F' + '<br>' +
+                                      'RealFeel: From ' + realmin + 'F' + ' to ' + realmax+ 'F' + '<br>' +
+                                      'Daytime: ' + dayp + '<br>' +
+                                      'Nght: ' + nightp + '<br>';
+                              },
+                       error:function(){
+                            inner += '<div> Weather not found</div>';
+                              }
+                          });
+
+              },
+              error:function(){
+                  inner += '<div> Weather not found</div>';
+              }
+          });
           var streetViewService = new google.maps.StreetViewService();
           var radius = 50;
-          // In case the status is OK, which means the pano was found, compute the
-          // position of the streetview image, then calculate the heading, then get a
-          // panorama from that and set the options
           function getStreetView(data, status) {
               console.log(status);
             if (status == google.maps.StreetViewStatus.OK) {
               var nearStreetViewLocation = data.location.latLng;
               var heading = google.maps.geometry.spherical.computeHeading(
                 nearStreetViewLocation, marker.position);
-                infowindow.setContent('<div id = "innerHTML">' + marker.title + '</div><div id="pano"></div>');
+                infowindow.setContent('<div id = "innerHTML">'+ inner +'</div>'+'<div>'+ marker.title + '</div><div id="pano"></div>');
                 var panoramaOptions = {
                   position: nearStreetViewLocation,
                   pov: {
@@ -276,36 +285,7 @@ ko.applyBindings(new viewModel());
             }
           }
 
-          var location_key;
-          var lat = marker.getPosition().lat();
-          var lng = marker.getPosition().lng();
-          var url_lockey = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=cE8RhaCzepxklSGYwdciXv9ugtB0wxYR&q="
-                      + lat +"%2C" + lng;
-          var url_weather1 = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/";
-          var apikey = "?apikey=cE8RhaCzepxklSGYwdciXv9ugtB0wxYR&details=True";
-          $.ajax({
-              url:url_lockey,
-              success:function(data){
-                  $.ajax({
-                      url:url_weather1 + data.Key + apikey,
-                      success:function(html){
-                              var min = html.DailyForecasts[0].Temperature.Minimum.Value;
-                              var max = html.DailyForecasts[0].Temperature.Maximum.Value
-                              var realmin = html.DailyForecasts[0].RealFeelTemperature.Minimum.Value;
-                              var realmax = html.DailyForecasts[0].RealFeelTemperature.Maximum.Value;
-                              var dayp = html.DailyForecasts[0].Day.LongPhrase;
-                              var nightp = html.DailyForecasts[0].Night.LongPhrase;
 
-                              var inner = '<br><br><strong>Weather</strong><br>';
-                              inner += 'Temperature: From ' + min + 'F' + ' to ' + max + 'F' + '<br>' +
-                                      'RealFeel: From ' + realmin + 'F' + ' to ' + realmax+ 'F' + '<br>' +
-                                      'Daytime: ' + dayp + '<br>' +
-                                      'Nght: ' + nightp + '<br>';
-                           $('#innerHTML').append(inner);
-                              }
-                          });
-                      }
-              });
           // Use streetview service to get the closest streetview image within
           // 50 meters of the markers position
           streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
@@ -347,7 +327,7 @@ ko.applyBindings(new viewModel());
       }
 
       function filter(){
-          var filter_value = document.getElementById("area").value;
+        //   var filter_value = document.getElementById("area").value;
 
 
           for (var i =0; i<placeMarkers().length; i++){
@@ -355,7 +335,7 @@ ko.applyBindings(new viewModel());
           }
 
 
-          if (filter_value == "manhattan") {
+          if (filter_value == "Manhattan") {
               for(var i = 0; i < markers().length; i++){
                      if(markers()[i].location == filter_value){
                          placeMarkers.push(markers()[i]);
@@ -363,7 +343,7 @@ ko.applyBindings(new viewModel());
                  }
           }
 
-          else if (filter_value == "queens") {
+          else if (filter_value == "Queens") {
               for(var i = 0; i < markers().length; i++){
                      if(markers()[i].location == filter_value){
                          placeMarkers.push(markers()[i]);
@@ -371,7 +351,7 @@ ko.applyBindings(new viewModel());
                  }
           }
 
-          else if (filter_value == "brooklyn") {
+          else if (filter_value == "Brooklyn") {
               for(var i = 0; i < markers().length; i++){
                      if(markers()[i].location == filter_value){
                          placeMarkers.push(markers()[i]);
@@ -379,7 +359,7 @@ ko.applyBindings(new viewModel());
                  }
           }
 
-          else if (filter_value == "bronx") {
+          else if (filter_value == "Bronx") {
               for(var i = 0; i < markers().length; i++){
                      if(markers()[i].location == filter_value){
                          placeMarkers.push(markers()[i]);

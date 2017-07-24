@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Neighborhood Map</title />
+    <title>Neighborhood Map</title>
 
-    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="css/demo.css" />
-	<link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+	<link rel="stylesheet" href="css/demo.css" />
+	<link rel="stylesheet" href="css/component.css" />
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/modernizr.custom.js"></script>
 </head>
 
@@ -24,15 +24,8 @@
                         <ul class="gn-menu">
                             <li>
                                 <span>&#160&#160&#160Filter&#160&#160&#160&#160&#160&#160&#160</span>
-                                    <span>
-                                        <select id="area">
-                                            <option value="all" selected = "selected">New York</option>
-                                            <option value="manhattan">Manhattan</option>
-                                            <option value="queens">Queens</option>
-                                            <option value="brooklyn">Brooklyn</option>
-                                            <option value="bronx">Bronx</option>
-                                        </select>
-                                    </span><input type = "submit" data-bind = "click:refresh" />
+                                        <select data-bind="options: areaList"></select>
+                                    <!-- </span><input type = "submit" value = "submit" data-bind = "click:refresh" /> -->
                             </li>
 
                             <li data-bind="foreach: placeMarkers">
@@ -57,6 +50,10 @@
     <script src="js/map.js"></script>
     <script>
         new gnMenu( document.getElementById( 'gn-menu' ) );
+    </script>
+    <script async defer
+        src=
+        "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDcbUPCzjDBhVogtJmPSpJjwMbkQCLzuCM&v=3.exp&callback=initMap">
     </script>
 </body>
 </html>
