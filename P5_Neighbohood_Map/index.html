@@ -23,16 +23,16 @@
                     <div class="gn-scroller">
                         <ul class="gn-menu">
                             <li>
-                                <span>&#160&#160&#160Filter&#160&#160&#160&#160&#160&#160&#160</span>
-                                        <select data-bind="options: areaList, value:selectedArea"></select>
+                                <select class = 'space' data-bind="options: areaList, value:selectedArea"></select>
+                                <span class = 'space'>Filter</span>
                             </li>
 
                             <li data-bind="foreach: placeMarkers">
-                                <div data-bind = "text:title, click: $parent.refresh"></div>
+                                <div class = 'space' data-bind = "text:title, click: $parent.refresh"></div>
                             </li>
 
                             <li>
-                                <div data-bind = "click: back">
+                                <div class = 'back' data-bind = "click: back">
                                     Back
                                 </div>
                             </li>
@@ -41,6 +41,7 @@
                     </div><!-- /gn-scroller -->
                 </nav>
             </li>
+                        <li><a class="codrops-icon codrops-icon-drop"><select class = 'space' data-bind="options: areaList, value:selectedArea"></select></a></li>
             <li><a class="codrops-icon codrops-icon-drop" data-bind = "click: showListings"><span>List Pop Janpanese Restaurant In NYC</span></a></li>
             <li><a class="codrops-icon codrops-icon-drop" data-bind = "click: hideAllMarkers"><span>Hide the List</span></a></li>
         </ul>
