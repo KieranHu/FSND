@@ -113,16 +113,14 @@ var locations = [
         location: 'Brooklyn'
     }
 ];
+//******************************************************************************************************//
 
 //global variable
 var map;
-// Create a new blank array for all the listing markers.
 var markers = ko.observableArray();
-
-// Create placemarkers array to use in multiple functions to have control
-// over the number of places that show.
 var placeMarkers = ko.observableArray();
-
+var areaList = ko.observableArray(['New York', 'Manhattan', 'Queens', 'Brooklyn', 'Bronx']);
+var selectedArea = ko.observable('New York');
 
 //******************************************************************************************************//
 
@@ -136,7 +134,6 @@ function initMap(){
           };
      map = new google.maps.Map(document.getElementById('map'), initMapOption);
 
-//******************************************************************************************************//
     var largeInfowindow = new google.maps.InfoWindow();
     // Style the markers a bit. This will be our listing marker icon.
     var defaultIcon = makeMarkerIcon('0091ff');
@@ -144,8 +141,6 @@ function initMap(){
     // Create a "highlighted location" marker color for when the user
     // mouses over the marker.
     var highlightedIcon = makeMarkerIcon('FFFF24');
-
-//******************************************************************************************************//
 
     // The following group uses the location array to create an array of markers on initialize.
     for (var i = 0; i < locations.length; i++) {
@@ -177,47 +172,58 @@ function initMap(){
         this.setIcon(defaultIcon);
       });
     }
-    filter();
-    showListings();
 //******************************************************************************************************//
-//Out map event control
+
+filter_loc('New York');
+showListings();
+
 
 var viewModel = function(){
 
     var self = this;
-    this.areaList = ko.observableArray(['New York', 'Manhattan', 'Queens', 'Brooklyn', 'Bronx'])
-    this.selectedArea = ko.observableArray(['New York'])
-    
+
     this.showListings = function(){
         showListings();
-    }
+    };
 
     this.hideAllMarkers = function() {
         hideMarkers(placeMarkers);
-    }
+    };
 
-    this.refresh = function(){
+    this.refresh = function(restaurant){
         hideMarkers(placeMarkers);
-        filter();
+        placeMarkers.removeAll();
+        placeMarkers.push(restaurant);
+        showListings();
+    };
+
+    this.back = function(){
+        hideMarkers(placeMarkers);
+        placeMarkers.removeAll();
+        filter_loc('New York');
         showListings();
     }
 }
 
 ko.applyBindings(new viewModel());
-
 }
 
 
-//******************************************************************************************************//
-// In map event control//
+selectedArea.subscribe(function(value){
+        hideMarkers(placeMarkers);
+        placeMarkers.removeAll();
+        filter_loc(value);
+        showListings();
+    });
 
-      function populateInfoWindow(marker, infowindow) {
-        // Check to make sure the infowindow is not already opened on this marker.
-        if (infowindow.marker != marker) {
+//******************************************************************************************************//
+
+function populateInfoWindow(marker, infowindow) {
+    // Check to make sure the infowindow is not already opened on this marker.
+    if (infowindow.marker != marker) {
           // Clear the infowindow content to give the streetview time to load.
           infowindow.setContent('');
           infowindow.marker = marker;
-          // Make sure the marker property is cleared if the infowindow is closed.
           infowindow.addListener('closeclick', function() {
             infowindow.marker = null;
           });
@@ -280,23 +286,17 @@ ko.applyBindings(new viewModel());
               var panorama = new google.maps.StreetViewPanorama(
                 document.getElementById('pano'), panoramaOptions);
             } else {
-              infowindow.setContent('<div id = "innerHTML">' + marker.title + '</div>' +
+              infowindow.setContent('<div id = "innerHTML">' + inner +'</div>'+'<div>'+ marker.title + '</div>' +
                 '<div>No Street View Found</div>');
             }
           }
 
-
-          // Use streetview service to get the closest streetview image within
-          // 50 meters of the markers position
           streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
           // Open the infowindow on the correct marker.
           infowindow.open(map, marker);
         }
       }
 
-      // This function takes in a COLOR, and then creates a new marker
-      // icon of that color. The icon will be 21 px wide by 34 high, have an origin
-      // of 0, 0 and be anchored at 10, 34).
       function makeMarkerIcon(markerColor) {
         var markerImage = new google.maps.MarkerImage(
           'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
@@ -316,7 +316,6 @@ ko.applyBindings(new viewModel());
       }
 
       function showListings(){
-
           var bounds = new google.maps.LatLngBounds();
                   // Extend the boundaries of the map for each marker and display the marker
                   for (var i = 0; i < placeMarkers().length; i++) {
@@ -326,53 +325,36 @@ ko.applyBindings(new viewModel());
                   map.fitBounds(bounds);
       }
 
-      function filter(){
-        //   var filter_value = document.getElementById("area").value;
-
-
-          for (var i =0; i<placeMarkers().length; i++){
-              placeMarkers.removeAll();
-          }
-
-
-          if (filter_value == "Manhattan") {
+      function filter_loc(value){
+        var filter_value = value;
+          function place_push(value){
               for(var i = 0; i < markers().length; i++){
-                     if(markers()[i].location == filter_value){
+                     if(markers()[i].location == value){
                          placeMarkers.push(markers()[i]);
                      }
                  }
+          }
+
+          if (filter_value == "Manhattan") {
+              place_push(filter_value);
           }
 
           else if (filter_value == "Queens") {
-              for(var i = 0; i < markers().length; i++){
-                     if(markers()[i].location == filter_value){
-                         placeMarkers.push(markers()[i]);
-                     }
-                 }
+              place_push(filter_value);
           }
 
           else if (filter_value == "Brooklyn") {
-              for(var i = 0; i < markers().length; i++){
-                     if(markers()[i].location == filter_value){
-                         placeMarkers.push(markers()[i]);
-                     }
-                 }
+              place_push(filter_value);
           }
 
           else if (filter_value == "Bronx") {
-              for(var i = 0; i < markers().length; i++){
-                     if(markers()[i].location == filter_value){
-                         placeMarkers.push(markers()[i]);
-                     }
-                 }
+              place_push(filter_value);
           }
 
-          else{
+          else if (filter_value == "New York"){
               for(var i = 0; i < markers().length; i++){
                   placeMarkers.push(markers()[i]);
               }
 
           }
-
-
       }

@@ -24,12 +24,17 @@
                         <ul class="gn-menu">
                             <li>
                                 <span>&#160&#160&#160Filter&#160&#160&#160&#160&#160&#160&#160</span>
-                                        <select data-bind="options: areaList"></select>
-                                    <!-- </span><input type = "submit" value = "submit" data-bind = "click:refresh" /> -->
+                                        <select data-bind="options: areaList, value:selectedArea"></select>
                             </li>
 
                             <li data-bind="foreach: placeMarkers">
-                                <div data-bind = "text:title"></div>
+                                <div data-bind = "text:title, click: $parent.refresh"></div>
+                            </li>
+
+                            <li>
+                                <div data-bind = "click: back">
+                                    Back
+                                </div>
                             </li>
 
                         </ul>
