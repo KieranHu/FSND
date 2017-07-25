@@ -147,6 +147,9 @@ function initMap(){
       // Create an onclick event to open the large infowindow at each marker.
       marker.addListener('click', function() {
         populateInfoWindow(this, largeInfowindow);
+        if (previousMarker != null){
+            previousMarker.setIcon(defaultIcon);
+        }
         this.setIcon(clickIcon);
       });
       marker.addListener('mouseover', function() {
@@ -222,10 +225,10 @@ function populateInfoWindow(marker, infowindow) {
           var location_key;
           var lat = marker.getPosition().lat();
           var lng = marker.getPosition().lng();
-          var url_lockey = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=LpGkZ8E6XJh7XZiydMXGgDJqJ2yFKawE&q="
+          var url_lockey = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=csh78CKPfd2pbUp1AIC0MeNAPSFMoZIt&q="
                       + lat +"%2C" + lng;
           var url_weather1 = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/";
-          var apikey = "?apikey=LpGkZ8E6XJh7XZiydMXGgDJqJ2yFKawE&details=True";
+          var apikey = "?apikey=csh78CKPfd2pbUp1AIC0MeNAPSFMoZIt&details=True";
           var inner;
           $.ajax({
               url:url_lockey,
