@@ -222,10 +222,10 @@ function populateInfoWindow(marker, infowindow) {
           var location_key;
           var lat = marker.getPosition().lat();
           var lng = marker.getPosition().lng();
-          var url_lockey = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=uWLTY8xHMUhISAr7YUk3JPnjPlnXdJEA&q="
+          var url_lockey = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=LpGkZ8E6XJh7XZiydMXGgDJqJ2yFKawE&q="
                       + lat +"%2C" + lng;
           var url_weather1 = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/";
-          var apikey = "?apikey=uWLTY8xHMUhISAr7YUk3JPnjPlnXdJEA&details=True";
+          var apikey = "?apikey=LpGkZ8E6XJh7XZiydMXGgDJqJ2yFKawE&details=True";
           var inner;
           $.ajax({
               url:url_lockey,
