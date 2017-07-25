@@ -330,4 +330,8 @@ input.gn-search:focus {
 	.gn-menu-wrapper.gn-open-all .gn-scroller {
 			width: 130%
 	}
+
+	.gn-menu-main > li > a {
+		padding: 0 10px;
+	}
 }

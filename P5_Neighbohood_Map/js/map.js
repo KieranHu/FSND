@@ -107,6 +107,7 @@ var markers = ko.observableArray();
 var placeMarkers = ko.observableArray();
 var areaList = ko.observableArray(['New York', 'Manhattan', 'Queens', 'Brooklyn', 'Bronx']);
 var selectedArea = ko.observable('New York');
+var previousMarker = null;
 
 //******************************************************************************************************//
 
@@ -171,11 +172,20 @@ var viewModel = function(){
     };
 
     this.refresh = function(restaurant){
+        if (previousMarker != null){
+            previousMarker.setIcon(defaultIcon);
+            closeInfowinsow(previousMarker, largeInfowindow);
+        }
         populateInfoWindow(restaurant, largeInfowindow);
         restaurant.setIcon(clickIcon);
+        previousMarker = restaurant;
     };
 
     this.back = function(){
+        if (previousMarker != null){
+            previousMarker.setIcon(defaultIcon);
+            closeInfowinsow(previousMarker, largeInfowindow);
+        }
         hideMarkers(placeMarkers);
         placeMarkers.removeAll();
         filter_loc('New York');
@@ -285,6 +295,10 @@ function populateInfoWindow(marker, infowindow) {
           }
 
         }
+      }
+
+      function closeInfowinsow(marker, infowindow){
+          infowindow.close(map, marker);
       }
 
       function makeMarkerIcon(markerColor) {
