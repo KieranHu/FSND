@@ -171,12 +171,8 @@ var viewModel = function(){
     };
 
     this.refresh = function(restaurant){
-        hideMarkers(placeMarkers);
-        placeMarkers.removeAll();
-        placeMarkers.push(restaurant);
         populateInfoWindow(restaurant, largeInfowindow);
         restaurant.setIcon(clickIcon);
-        showListings();
     };
 
     this.back = function(){
@@ -216,10 +212,10 @@ function populateInfoWindow(marker, infowindow) {
           var location_key;
           var lat = marker.getPosition().lat();
           var lng = marker.getPosition().lng();
-          var url_lockey = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=0HDeENqpJBIeTMQGNCpgOsUtGniAAMF3&q="
+          var url_lockey = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=uWLTY8xHMUhISAr7YUk3JPnjPlnXdJEA&q="
                       + lat +"%2C" + lng;
           var url_weather1 = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/";
-          var apikey = "?apikey=0HDeENqpJBIeTMQGNCpgOsUtGniAAMF3&details=True";
+          var apikey = "?apikey=uWLTY8xHMUhISAr7YUk3JPnjPlnXdJEA&details=True";
           var inner;
           $.ajax({
               url:url_lockey,
@@ -245,12 +241,13 @@ function populateInfoWindow(marker, infowindow) {
                               },
                       error:function(){
                           inner = '<div> Weather not found</div>';
+                          succ();
                       }
 
                   });
             },
             error:function(){
-                inner += '<div> localtion key not found</div>';
+                inner = '<div> localtion key not found</div>';
                 succ();
             }
           });

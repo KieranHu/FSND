@@ -2,7 +2,7 @@
 
 Your can view the [website](https://kieranhu.github.io/Neighborhood_map/) at here.
 
-This app can display some pop japanese restaurant in NYC area. You can alos filter those restaurants according to their location.
+This app can display some pop japanese restaurant in NYC area. You can also filter those restaurants according to their location.
 
 ## Locally run this app
 
